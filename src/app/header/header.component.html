@@ -1,0 +1,34 @@
+<div class="container-fluid" style="padding: 0;">
+  <nav class="navbar navbar-light mb-5" style="background-color: #fff;">
+    <a class="navbar-brand" routerLink="/">G&amp;G Product Inc.</a>
+    <div class="navbar-expand mr-auto">
+      <div class="navbar-nav">
+        <a routerLinkActive="active" routerLink="" [routerLinkActiveOptions]="{exact:
+true}" class="nav-item nav-link">Welcome</a>
+        <a routerLinkActive="active" routerLink="/feature" class="nav-item nav-link">Feature</a>
+        <a routerLinkActive="active" routerLink="/design" class="nav-item nav-link">Design</a>
+        <a routerLinkActive="active" routerLink="/video" class="nav-item nav-link">Video</a>
+      </div>
+    </div>
+    <div class="navbar-expand ml-auto navbar-nav">
+      <div class="navbar-nav">
+        <a *ngIf="!isAuth" routerLinkActive="active" routerLink="/contact" class="nav-item nav-link">Contact</a>
+        <a *ngIf="isAuth" routerLinkActive="active" routerLink="/dashboard" class="nav-item nav-link">
+          <span style="font-size: 1.5em; color: tomato;">
+            <i class="fas fa-tachometer-alt"></i>
+          </span>
+        </a>
+        <a *ngIf="!isAuth" class="nav-item nav-link" routerLink="/auth/signin">
+          <span style="font-size: 1.5em;">
+            <i class="fas fa-sign-in-alt"></i>
+          </span>
+        </a>
+        <a *ngIf="isAuth" class="nav-item nav-link" (click)="onSignOut()">
+          <span style="font-size: 1.5em;">
+            <i class="fas fa-sign-out-alt"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>

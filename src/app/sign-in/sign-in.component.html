@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3 form-container">
+      <h2 class="text-center">Connect to Your Account</h2>
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" class="form-control" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" class="form-control" formControlName="password">
+        </div>
+        <button type="submit"
+                class="btn btn-primary d-block"
+                style="margin-right: auto; margin-left: auto;"
+                [disabled]="signInForm.invalid">Login</button>
+      </form>
+      <p class="text-danger">{{ errorMessage }}</p>
+    </div>
+  </div>
+</div>
