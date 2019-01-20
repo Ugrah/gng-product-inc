@@ -7,7 +7,6 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'gng-product-inc';
 
   constructor() {
     // Initialize Firebase

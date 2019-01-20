@@ -1,0 +1,22 @@
+.list-group{
+  height: 100vh;
+  background-color: #292B2E;
+
+  .list-group-item{
+    font-size: 0.9em;
+    background-color: #292B2E;
+    color: #707172;
+    box-shadow: none;
+  }
+
+  .list-group-item.active{
+    background-color: #232426;
+    color: #f4f4f4;
+  }
+
+  .list-group-item:active, .list-group-item:focus{
+    outline: none !important;
+    box-shadow: none;
+  }
+
+}
