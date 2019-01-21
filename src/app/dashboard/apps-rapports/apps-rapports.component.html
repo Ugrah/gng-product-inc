@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col">
+    <div class="card-deck">
+
+      <div class="card border-secondary">
+        <div class="card-body bg-light text-secondary p-0">
+          <div class="row p-0 m-0">
+            <div class="col-6 pr-1 pb-2 pt-0 m-0">
+              <span class="align-bottom display-3"><i class="fas fa-folder-plus"></i></span>
+            </div>
+            <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllNewAppsCount() }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformNewApps().length }}</span></div>
+              <div class="col-12 p-0 m-0"><small>New additions</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-light bg-secondary">
+          Footer
+          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+        </div>
+      </div>
+
+      <div class="card border-secondary">
+        <div class="card-body bg-secondary text-light p-0">
+          <div class="row p-0 m-0">
+            <div class="col-6 pr-1 pb-2 pt-0 m-0">
+              <span class="align-bottom display-3"><i class="fas fa-edit"></i></span>
+            </div>
+            <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllToUpdatedAppsCount() }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformToUpdateApps().length }}</span></div>
+              <div class="col-12 p-0 m-0"><small>To update</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-secondary bg-light">
+          Footer
+          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+        </div>
+      </div>
+
+      <div class="card border-info">
+        <div class="card-body bg-info text-light p-0">
+          <div class="row p-0 m-0">
+            <div class="col-6 pr-1 pb-2 pt-0 m-0">
+              <span class="align-bottom display-3"><i class="fas fa-upload"></i></span>
+            </div>
+            <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllReadyToPublishedAppsCount() }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformReadyToPublishedApps().length }}</span></div>
+              <div class="col-12 p-0 m-0"><small>Ready to publish</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-info bg-light">
+          Footer
+          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+        </div>
+      </div>
+
+      <div class="card border-warning">
+        <div class="card-body bg-warning text-light p-0">
+          <div class="row p-0 m-0">
+            <div class="col-6 pr-1 pb-2 pt-0 m-0">
+              <span class="align-bottom display-3"><i class="fas fa-tasks"></i></span>
+            </div>
+            <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllCheckingAppsCount() }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformCheckingApps().length }}</span></div>
+              <div class="col-12 p-0 m-0"><small>Pending approval</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-warning bg-light">
+          Footer
+          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+        </div>
+      </div>
+
+      <div class="card border-success">
+        <div class="card-body bg-success text-light p-0">
+          <div class="row p-0 m-0">
+            <div class="col-6 pr-1 pb-2 pt-0 m-0">
+              <span class="align-bottom display-3"><i class="far fa-check-circle"></i></span>
+            </div>
+            <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllPublishedAppsCount() }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformPublishedApps().length }}</span></div>
+              <div class="col-12 p-0 m-0"><small>Already published</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-success bg-light">
+          Footer
+          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+        </div>
+      </div>
+
+      <div class="card border-danger">
+        <div class="card-body bg-danger text-light p-0">
+          <div class="row p-0 m-0">
+            <div class="col-6 pr-1 pb-2 pt-0 m-0">
+              <span class="align-bottom display-3"><i class="fas fa-ban"></i></span>
+            </div>
+            <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllRejectedAppsCount() }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformRejectedApps().length }}</span></div>
+              <div class="col-12 p-0 m-0"><small>Rejected apps</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-danger bg-light">
+          Footer
+          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

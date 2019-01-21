@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  private _opened: boolean = false;
+  private _opened: boolean = true;
 
   constructor() {
   }

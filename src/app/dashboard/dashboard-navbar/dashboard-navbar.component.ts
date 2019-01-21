@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DashboardComponent} from '../dashboard.component';
 import * as firebase from 'firebase';
-import {AuthService} from '../../providers/auth.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard-navbar',
@@ -12,8 +12,7 @@ export class DashboardNavbarComponent implements OnInit {
 
   isAuth: boolean;
 
-  constructor(private mainDashboard: DashboardComponent,
-              private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     firebase.auth().onAuthStateChanged(
@@ -25,10 +24,6 @@ export class DashboardNavbarComponent implements OnInit {
         }
       }
     );
-  }
-
-  toggleSidebar() {
-    this.mainDashboard.toggleSidebar();
   }
 
   onSignOut() {

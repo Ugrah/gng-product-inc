@@ -1,0 +1,138 @@
+<app-dashboard-navbar></app-dashboard-navbar>
+
+<ng-sidebar-container style="height: 100vh;">
+
+  <!-- A sidebar -->
+  <ng-sidebar mode="over" [(opened)]="_opened">
+    <app-dashboard-aside></app-dashboard-aside>
+  </ng-sidebar>
+
+  <!-- Page content -->
+  <div ng-sidebar-content style="position: relative;">
+    <div *ngIf="_opened" ngStyle="" style="z-index: 10; background-color: rgba(34,34,34,0.4); width: 100%; height: 100%; position: absolute; top: 0; left: 0;" (click)="toggleSidebar()"></div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <a (click)="toggleSidebar()">
+            <span style="font-size: 1.2em;">
+              <i *ngIf="!_opened" class="fas fa-bars"></i>
+              <i *ngIf="_opened" class="fas fa-times"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h3>Applications <small class="text-muted">Statistic Overview</small></h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header text-muted">
+              <span style="font-size: 1.2em;">
+                <i class="fas fa-mobile-alt"></i>
+              </span> Mobile Apps
+
+
+              <!-- Add new App Button -->
+              <button type="button" class="btn btn-info float-right" (click)="onOpenModal(contentModal)">
+                <span style="font-size: 1.2em;">
+                <i class="fas fa-plus-square"></i>
+              </span> Add New App
+              </button>
+
+              <!-- Modal Add New App -->
+              <ng-template #contentModal let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">Add New App</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <app-new-app-form></app-new-app-form>
+                </div>
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs bouttons -->
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-all-apps-tab" data-toggle="tab" href="#nav-all-apps" role="tab" aria-controls="nav-all-apps" aria-selected="true">
+            <span style="font-size: 1.2em;"><i class="fas fa-mobile"></i></span> All Mobile Apps
+            <span [ngClass]="{'badge': true,
+                             'badge-info': appsService.getTotalCountApps() === 0,
+                             'badge-success': appsService.getTotalCountApps() > 0 } ">
+              {{ appsService.getTotalCountApps() }}</span>
+          </a>
+          <a class="nav-item nav-link" id="nav-ios-apps-tab" data-toggle="tab" href="#nav-ios-apps" role="tab" aria-controls="nav-ios-apps" aria-selected="false">
+            <span style="font-size: 1.2em;"><i class="fab fa-app-store-ios"></i></span> Ios Apps
+            <span [ngClass]="{'badge': true,
+                             'badge-info': appsService.iosAppsList.length === 0,
+                             'badge-success': appsService.iosAppsList.length > 0 } ">
+              {{ appsService.iosAppsList.length }}</span>
+          </a>
+          <a class="nav-item nav-link" id="nav-android-apps-tab" data-toggle="tab" href="#nav-android-apps" role="tab" aria-controls="nav-android-apps" aria-selected="false">
+            <span style="font-size: 1.2em;"><i class="fab fa-android"></i></span> Android Apps
+            <span [ngClass]="{'badge': true,
+                             'badge-info': appsService.androidAppsList.length === 0,
+                             'badge-success': appsService.androidAppsList.length > 0 } ">
+              {{ appsService.androidAppsList.length }}</span></a>
+        </div>
+      </nav>
+
+      <!-- Tabs content -->
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-all-apps" role="tabpanel" aria-labelledby="nav-all-apps-tab">
+          <div class="row">
+            <div class="col">
+              <div class="card border-light mb-3">
+                <div class="card-body text-dark">
+                  <p class="card-text">Mobile Apps Management. Here you need all the necessary features to manage the applications of your developer group.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-apps-rapports></app-apps-rapports>
+        </div>
+
+        <div class="tab-pane fade" id="nav-ios-apps" role="tabpanel" aria-labelledby="nav-ios-apps-tab">
+          <div class="row">
+            <div class="col">
+              <div class="card border-light mb-3">
+                <div class="card-body text-dark">
+                  <p class="card-text">Mobile Apps Management. Here you need all the necessary features to manage the applications of your developer group.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-apps-rapports [platform]="'ios'"></app-apps-rapports>
+        </div>
+
+        <div class="tab-pane fade" id="nav-android-apps" role="tabpanel" aria-labelledby="nav-android-apps-tab">
+          <div class="row">
+            <div class="col">
+              <div class="card border-light mb-3">
+                <div class="card-body text-dark">
+                  <p class="card-text">Mobile Apps Management. Here you need all the necessary features to manage the applications of your developer group.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-apps-rapports [platform]="'android'"></app-apps-rapports>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</ng-sidebar-container>

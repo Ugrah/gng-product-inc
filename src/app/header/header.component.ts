@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import {AuthService} from '../providers/auth.service';
-import {AuthGuardService} from '../providers/auth-guard.service';
+import {AuthService} from '../services/auth.service';
+import {AuthGuardService} from '../services/auth-guard.service';
 
 @Component({
   selector: 'app-header',
