@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
 import {IosApp} from '../models/Ios.app.model';
 import {AndroidApp} from '../models/Android.app.model';
@@ -9,11 +9,11 @@ import {Subject} from 'rxjs';
 })
 export class AppsService {
 
-  iosAppsListSubject = new Subject<any[]>();
-  androidAppsListSubject = new Subject<any[]>();
+  iosAppsListSubject = new Subject<IosApp[]>();
+  androidAppsListSubject = new Subject<AndroidApp[]>();
 
-  private iosAppsList: IosApp[] = [];
-  private androidAppsList: AndroidApp[] = [];
+  iosAppsList: IosApp[] = [];
+  androidAppsList: AndroidApp[] = [];
 
 
   constructor() {
@@ -25,11 +25,45 @@ export class AppsService {
   }
 
   emitIosAppsSubject() {
-    this.iosAppsListSubject.next(this.iosAppsList.slice());
+    this.iosAppsListSubject.next(this.iosAppsList);
   }
 
   emitAndroidAppsSubject() {
-    this.androidAppsListSubject.next(this.androidAppsList.slice());
+    this.androidAppsListSubject.next(this.androidAppsList);
+  }
+
+  saveAllAppsToServer() {
+    this.saveIosAppsToServer();
+    this.saveAndroidAppsToServer();
+  }
+
+  saveIosAppsToServer() {
+    firebase.database().ref('/iosApps').set(this.iosAppsList);
+  }
+
+  saveAndroidAppsToServer() {
+    firebase.database().ref('/androidApps').set(this.androidAppsList);
+  }
+
+  getAllAppsFromServer() {
+    this.getIosAppsFromServer();
+    this.getAndroidAppsFromServer();
+  }
+
+  getIosAppsFromServer() {
+    firebase.database().ref('/iosApps')
+      .on('value', (data) => {
+        this.iosAppsList = data.val() ? data.val() : [];
+        this.emitIosAppsSubject();
+      });
+  }
+
+  getAndroidAppsFromServer() {
+    firebase.database().ref('/androidApps')
+      .on('value', (data) => {
+        this.androidAppsList = data.val() ? data.val() : [];
+        this.emitAndroidAppsSubject();
+      });
   }
 
   createNewApp(name, platforms?: {ios: boolean, android: boolean}) {
@@ -40,18 +74,20 @@ export class AppsService {
     if (platforms.android) {
       this.addAndroidApp(name);
     }
-
-    this.emitAllApps();
   }
 
   addIosApp(appName) {
     const newIosApp = new IosApp(appName);
     this.iosAppsList.push(newIosApp);
+    this.saveIosAppsToServer();
+    this.emitIosAppsSubject();
   }
 
   addAndroidApp(appName) {
     const newAndroidApp = new AndroidApp(appName);
     this.androidAppsList.push(newAndroidApp);
+    this.saveAndroidAppsToServer();
+    this.emitAndroidAppsSubject();
   }
 
   getTotalCountApps() {

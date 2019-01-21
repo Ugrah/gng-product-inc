@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AppsService} from '../../services/apps.service';
 import {Subscription} from 'rxjs';
 import {IosApp} from '../../models/Ios.app.model';
@@ -9,10 +9,7 @@ import {AndroidApp} from '../../models/Android.app.model';
   templateUrl: './apps-rapports.component.html',
   styleUrls: ['./apps-rapports.component.scss']
 })
-export class AppsRapportsComponent implements OnInit {
-
-  empty: string = '0';
-
+export class AppsRapportsComponent implements OnInit, OnDestroy {
   @Input() platform?: 'ios' | 'android';
 
   iosApps: IosApp[];
@@ -35,6 +32,8 @@ export class AppsRapportsComponent implements OnInit {
         this.androidApps = androidApps;
       }
     );
+
+    this.appsService.getAllAppsFromServer();
     this.appsService.emitAllApps();
   }
 
@@ -94,6 +93,11 @@ export class AppsRapportsComponent implements OnInit {
     } else if (this.platform === 'android') {
       return this.androidApps.filter(app => app.rejected).slice();
     }
+  }
+
+  ngOnDestroy() {
+    this.appsService.iosAppsListSubject.unsubscribe();
+    this.appsService.androidAppsListSubject.unsubscribe();
   }
 
 }
