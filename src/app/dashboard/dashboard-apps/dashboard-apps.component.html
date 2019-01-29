@@ -69,23 +69,23 @@
           <a class="nav-item nav-link active" id="nav-all-apps-tab" data-toggle="tab" href="#nav-all-apps" role="tab" aria-controls="nav-all-apps" aria-selected="true">
             <span style="font-size: 1.2em;"><i class="fas fa-mobile"></i></span> All Mobile Apps
             <span [ngClass]="{'badge': true,
-                             'badge-info': appsService.getTotalCountApps() === 0,
-                             'badge-success': appsService.getTotalCountApps() > 0 } ">
-              {{ appsService.getTotalCountApps() }}</span>
+                             'badge-info': appsService.getAppsCountByPlatform() === 0,
+                             'badge-success': appsService.getAppsCountByPlatform() > 0 } ">
+              {{ appsService.getAppsCountByPlatform() }}</span>
           </a>
           <a class="nav-item nav-link" id="nav-ios-apps-tab" data-toggle="tab" href="#nav-ios-apps" role="tab" aria-controls="nav-ios-apps" aria-selected="false">
             <span style="font-size: 1.2em;"><i class="fab fa-app-store-ios"></i></span> Ios Apps
             <span [ngClass]="{'badge': true,
-                             'badge-info': appsService.iosAppsList.length === 0,
-                             'badge-success': appsService.iosAppsList.length > 0 } ">
-              {{ appsService.iosAppsList.length }}</span>
+                             'badge-info': appsService.getAppsCountByPlatform('ios') === 0,
+                             'badge-success': appsService.getAppsCountByPlatform('ios') > 0 } ">
+              {{ appsService.getAppsCountByPlatform('ios') }}</span>
           </a>
           <a class="nav-item nav-link" id="nav-android-apps-tab" data-toggle="tab" href="#nav-android-apps" role="tab" aria-controls="nav-android-apps" aria-selected="false">
             <span style="font-size: 1.2em;"><i class="fab fa-android"></i></span> Android Apps
             <span [ngClass]="{'badge': true,
-                             'badge-info': appsService.androidAppsList.length === 0,
-                             'badge-success': appsService.androidAppsList.length > 0 } ">
-              {{ appsService.androidAppsList.length }}</span></a>
+                             'badge-info': appsService.getAppsCountByPlatform('android') === 0,
+                             'badge-success': appsService.getAppsCountByPlatform('android') > 0 } ">
+              {{ appsService.getAppsCountByPlatform('android') }}</span></a>
         </div>
       </nav>
 

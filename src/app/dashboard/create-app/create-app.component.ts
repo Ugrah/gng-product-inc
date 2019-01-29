@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-create-app',
+  templateUrl: './create-app.component.html',
+  styleUrls: ['./create-app.component.scss']
 })
-export class DashboardComponent {
+export class CreateAppComponent {
 
   private _opened = false;
 

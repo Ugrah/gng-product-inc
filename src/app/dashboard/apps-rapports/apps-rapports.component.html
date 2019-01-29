@@ -9,9 +9,9 @@
               <span class="align-bottom display-3"><i class="fas fa-folder-plus"></i></span>
             </div>
             <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
-              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllNewAppsCount() }}</span></div>
-              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformNewApps().length }}</span></div>
-              <div class="col-12 p-0 m-0"><small>New additions</small></div>
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getNewAppsByPlatform('ios').length + appsService.getNewAppsByPlatform('android').length }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getNewAppsByPlatform(platform).length }}</span></div>
+              <div class="col-12 p-0 m-0"><small>New Apps</small></div>
             </div>
           </div>
         </div>
@@ -28,8 +28,8 @@
               <span class="align-bottom display-3"><i class="fas fa-edit"></i></span>
             </div>
             <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
-              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllToUpdatedAppsCount() }}</span></div>
-              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformToUpdateApps().length }}</span></div>
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getToUpdateAppsByPlatform('ios').length + appsService.getToUpdateAppsByPlatform('android').length }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getToUpdateAppsByPlatform(platform).length }}</span></div>
               <div class="col-12 p-0 m-0"><small>To update</small></div>
             </div>
           </div>
@@ -47,8 +47,8 @@
               <span class="align-bottom display-3"><i class="fas fa-upload"></i></span>
             </div>
             <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
-              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllReadyToPublishedAppsCount() }}</span></div>
-              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformReadyToPublishedApps().length }}</span></div>
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getReadyToPublishAppsByPlatform('ios').length + appsService.getReadyToPublishAppsByPlatform('android').length }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getReadyToPublishAppsByPlatform(platform).length }}</span></div>
               <div class="col-12 p-0 m-0"><small>Ready to publish</small></div>
             </div>
           </div>
@@ -66,8 +66,8 @@
               <span class="align-bottom display-3"><i class="fas fa-tasks"></i></span>
             </div>
             <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
-              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllCheckingAppsCount() }}</span></div>
-              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformCheckingApps().length }}</span></div>
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getCheckingAppsByPlatform('ios').length + appsService.getCheckingAppsByPlatform('android').length }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getCheckingAppsByPlatform(platform).length }}</span></div>
               <div class="col-12 p-0 m-0"><small>Pending approval</small></div>
             </div>
           </div>
@@ -85,8 +85,8 @@
               <span class="align-bottom display-3"><i class="far fa-check-circle"></i></span>
             </div>
             <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
-              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllPublishedAppsCount() }}</span></div>
-              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformPublishedApps().length }}</span></div>
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getPublishedAppsByPlatform('ios').length + appsService.getPublishedAppsByPlatform('android').length }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getPublishedAppsByPlatform(platform).length }}</span></div>
               <div class="col-12 p-0 m-0"><small>Already published</small></div>
             </div>
           </div>
@@ -104,8 +104,8 @@
               <span class="align-bottom display-3"><i class="fas fa-ban"></i></span>
             </div>
             <div class="col-6 text-right pl-1 pb-2 pt-1 m-0">
-              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getAllRejectedAppsCount() }}</span></div>
-              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ getPlatformRejectedApps().length }}</span></div>
+              <div *ngIf="!platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getRejectedAppsByPlatform('ios').length + appsService.getRejectedAppsByPlatform('android').length }}</span></div>
+              <div *ngIf="platform" class="col-12 p-0 m-0"><span class="display-4">{{ appsService.getRejectedAppsByPlatform(platform).length }}</span></div>
               <div class="col-12 p-0 m-0"><small>Rejected apps</small></div>
             </div>
           </div>

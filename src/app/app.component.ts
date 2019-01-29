@@ -10,7 +10,7 @@ export class AppComponent {
 
   constructor() {
     // Initialize Firebase
-    var config = {
+    const config = {
       apiKey: 'AIzaSyAfCIqQnKsIbKjm6BjnIIF5R2n0SgOKiXk',
       authDomain: 'gng-product-inc.firebaseapp.com',
       databaseURL: 'https://gng-product-inc.firebaseio.com',

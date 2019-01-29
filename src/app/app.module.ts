@@ -21,6 +21,8 @@ import { DashboardAppsComponent } from './dashboard/dashboard-apps/dashboard-app
 import {AppsService} from './services/apps.service';
 import { NewAppFormComponent } from './forms/new-app-form/new-app-form.component';
 import { AppsRapportsComponent } from './dashboard/apps-rapports/apps-rapports.component';
+import { CreateAppComponent } from './dashboard/create-app/create-app.component';
+import { EditAppComponent } from './dashboard/edit-app/edit-app.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { AppsRapportsComponent } from './dashboard/apps-rapports/apps-rapports.c
     HomeCarouselComponent,
     DashboardAppsComponent,
     NewAppFormComponent,
-    AppsRapportsComponent
+    AppsRapportsComponent,
+    CreateAppComponent,
+    EditAppComponent
   ],
   imports: [
     BrowserModule,

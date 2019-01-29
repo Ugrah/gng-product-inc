@@ -1,22 +1,41 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
 import {IosApp} from '../models/Ios.app.model';
 import {AndroidApp} from '../models/Android.app.model';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppsService {
+export class AppsService implements OnInit, OnDestroy {
 
   iosAppsListSubject = new Subject<IosApp[]>();
   androidAppsListSubject = new Subject<AndroidApp[]>();
 
   iosAppsList: IosApp[] = [];
+  iosAppsSubscription: Subscription;
+
   androidAppsList: AndroidApp[] = [];
+  androidAppsSubscription: Subscription;
 
 
-  constructor() {
+  constructor(private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.iosAppsSubscription = this.iosAppsListSubject.subscribe(
+      (iosApps: IosApp[]) => {
+        this.iosAppsList = iosApps;
+    });
+
+    this.androidAppsSubscription = this.androidAppsListSubject.subscribe(
+      (androidApps: AndroidApp[]) => {
+        this.androidAppsList = androidApps;
+      });
+
+    this.getAllAppsFromServer();
+    this.emitAllApps();
   }
 
   emitAllApps() {
@@ -70,7 +89,6 @@ export class AppsService {
     if (platforms.ios) {
       this.addIosApp(name);
     }
-
     if (platforms.android) {
       this.addAndroidApp(name);
     }
@@ -90,32 +108,79 @@ export class AppsService {
     this.emitAndroidAppsSubject();
   }
 
-  getTotalCountApps() {
-    return this.iosAppsList.length + this.androidAppsList.length;
+  getAppList(platform: 'ios' | 'android', appId: string) {
+    return this[`${platform}AppsList`].find(item => item.id === appId);
   }
 
-  getAllNewAppsCount() {
-    return this.iosAppsList.filter(app => !app.published).length + this.androidAppsList.filter(app => !app.published).length;
+  getAppsCountByPlatform(platform?: 'ios' | 'android') {
+    if (platform === 'ios') {
+      return this.iosAppsList.length;
+    } else if (platform === 'android') {
+      return this.androidAppsList.length;
+    } else {
+      return this.iosAppsList.length + this.androidAppsList.length;
+    }
   }
 
-  getAllToUpdatedAppsCount() {
-    return this.iosAppsList.filter(app => app.toUpdate).length + this.androidAppsList.filter(app => app.toUpdate).length;
+  getAppsByPlatform(platform?: 'ios' | 'android') {
+    if (platform === 'ios') {
+      return this.iosAppsList.slice();
+    } else if (platform === 'android') {
+      return this.androidAppsList.slice();
+    }
   }
 
-  getAllReadyToPublishedAppsCount() {
-    return this.iosAppsList.filter(app => app.readyToPublished).length + this.androidAppsList.filter(app => app.readyToPublished).length;
+  getNewAppsByPlatform(platform?: 'ios' | 'android') {
+    if (platform === 'ios') {
+      return this.iosAppsList.filter(app => !app.published).slice();
+    } else if (platform === 'android') {
+      return this.androidAppsList.filter(app => !app.published).slice();
+    }
   }
 
-  getAllCheckingAppsCount() {
-    return this.iosAppsList.filter(app => app.checking).length + this.androidAppsList.filter(app => app.checking).length;
+  getToUpdateAppsByPlatform(platform?: 'ios' | 'android') {
+    if (platform === 'ios') {
+      return this.iosAppsList.filter(app => app.toUpdate).slice();
+    } else if (platform === 'android') {
+      return this.androidAppsList.filter(app => app.toUpdate).slice();
+    }
   }
 
-  getAllPublishedAppsCount() {
-    return this.iosAppsList.filter(app => app.published).length + this.androidAppsList.filter(app => app.published).length;
+  getReadyToPublishAppsByPlatform(platform?: 'ios' | 'android') {
+    if (platform === 'ios') {
+      return this.iosAppsList.filter(app => app.readyToPublished).slice();
+    } else if (platform === 'android') {
+      return this.androidAppsList.filter(app => app.readyToPublished).slice();
+    }
   }
 
-  getAllRejectedAppsCount() {
-    return this.iosAppsList.filter(app => app.rejected).length + this.androidAppsList.filter(app => app.rejected).length;
+  getCheckingAppsByPlatform(platform?: 'ios' | 'android') {
+    if (platform === 'ios') {
+      return this.iosAppsList.filter(app => app.checking).slice();
+    } else if (platform === 'android') {
+      return this.androidAppsList.filter(app => app.checking).slice();
+    }
+  }
+
+  getPublishedAppsByPlatform(platform?: 'ios' | 'android') {
+    if (platform === 'ios') {
+      return this.iosAppsList.filter(app => app.published).slice();
+    } else if (platform === 'android') {
+      return this.androidAppsList.filter(app => app.published).slice();
+    }
+  }
+
+  getRejectedAppsByPlatform(platform?: 'ios' | 'android') {
+    if (platform === 'ios') {
+      return this.iosAppsList.filter(app => app.rejected).slice();
+    } else if (platform === 'android') {
+      return this.androidAppsList.filter(app => app.rejected).slice();
+    }
+  }
+
+  ngOnDestroy() {
+    this.iosAppsListSubject.unsubscribe();
+    this.androidAppsListSubject.unsubscribe();
   }
 
 }
