@@ -23,6 +23,14 @@ import { NewAppFormComponent } from './forms/new-app-form/new-app-form.component
 import { AppsRapportsComponent } from './dashboard/apps-rapports/apps-rapports.component';
 import { CreateAppComponent } from './dashboard/create-app/create-app.component';
 import { EditAppComponent } from './dashboard/edit-app/edit-app.component';
+import { ShowSingleAppComponent } from './dashboard/show-single-app/show-single-app.component';
+import { AppsByPlatformComponent } from './dashboard/apps-by-platform/apps-by-platform.component';
+import { NewAppsComponent } from './dashboard/dashboard-apps/new-apps/new-apps.component';
+import { ToUpdateAppsComponent } from './dashboard/dashboard-apps/to-update-apps/to-update-apps.component';
+import { ReadyAppsComponent } from './dashboard/dashboard-apps/ready-apps/ready-apps.component';
+import { PendingApprovalAppsComponent } from './dashboard/dashboard-apps/pending-approval-apps/pending-approval-apps.component';
+import { AlreadyPublishedAppsComponent } from './dashboard/dashboard-apps/already-published-apps/already-published-apps.component';
+import { RejectedAppsComponent } from './dashboard/dashboard-apps/rejected-apps/rejected-apps.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +47,15 @@ import { EditAppComponent } from './dashboard/edit-app/edit-app.component';
     NewAppFormComponent,
     AppsRapportsComponent,
     CreateAppComponent,
-    EditAppComponent
+    EditAppComponent,
+    ShowSingleAppComponent,
+    AppsByPlatformComponent,
+    NewAppsComponent,
+    ToUpdateAppsComponent,
+    ReadyAppsComponent,
+    PendingApprovalAppsComponent,
+    AlreadyPublishedAppsComponent,
+    RejectedAppsComponent
   ],
   imports: [
     BrowserModule,

@@ -14,4 +14,11 @@ export class AppsRapportsComponent {
     this.appsService.emitAllApps();
   }
 
+  getRouterLinkFromLink(link): string {
+    if (this.platform) {
+      link = link + '/' + this.platform;
+    }
+    return link;
+  }
+
 }

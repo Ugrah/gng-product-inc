@@ -2,3 +2,25 @@
   min-width: 18rem;
   margin-bottom: 2rem;
 }
+
+.link-unstyled {
+  &,
+  &:visited,
+  &:hover,
+  &:active,
+  &:focus,
+  &:active:hover {
+    font-style: inherit;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
+    text-decoration: none;
+    font-variant: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    outline: inherit;
+    box-shadow: inherit;
+    vertical-align: inherit;
+  }
+}

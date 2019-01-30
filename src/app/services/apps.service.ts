@@ -108,10 +108,6 @@ export class AppsService implements OnInit, OnDestroy {
     this.emitAndroidAppsSubject();
   }
 
-  getAppList(platform: 'ios' | 'android', appId: string) {
-    return this[`${platform}AppsList`].find(item => item.id === appId);
-  }
-
   getAppsCountByPlatform(platform?: 'ios' | 'android') {
     if (platform === 'ios') {
       return this.iosAppsList.length;

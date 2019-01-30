@@ -1,0 +1,21 @@
+<table *ngIf="appsList.length > 0" class="table table-striped">
+  <thead class="bg-primary">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">AppName</th>
+    <th scope="col">packageName</th>
+    <th scope="col">Show App</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let app of appsList; let i = index">
+    <td>{{ i + 1}}</td>
+    <td>{{ app.appName }}</td>
+    <td *ngIf="app.packageName">{{ app.packageName }}</td>
+    <td *ngIf="!app.packageName" class="text-muted">Undefined</td>
+    <td><button type="button" class="btn btn-light">Show</button></td>
+  </tr>
+  </tbody>
+</table>
+
+<p *ngIf="appsList.length <= 0">No applications found.</p>

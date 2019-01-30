@@ -9,7 +9,7 @@ import {AppsService} from '../../services/apps.service';
 })
 export class DashboardAppsComponent implements OnInit {
 
-  private _opened: boolean = false;
+  private _opened = false;
 
   constructor(private modalService: NgbModal,
               private appsService: AppsService) {
