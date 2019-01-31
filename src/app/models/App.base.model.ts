@@ -4,28 +4,35 @@ import { UUID } from 'angular2-uuid';
 export class AppBase {
 
   public id: any;
-  public completeDescription: string = '';
-  public design: boolean = false;
-  public creation: boolean = false;
-  public packageName: string = '';
-  public remarks: string = '';
+  public completeDescription = '';
+  public design = false;
+  public creation = false;
+  public packageName = '';
+  public remarks = '';
   public keyWords: string[] = [];
-  public confidentialityAgreement: boolean = false;
-  public toUpdate: boolean = false;
-  public readyToPublished: boolean = false;
-  public checking: boolean = false;
-  public published: boolean = false;
-  public rejected: boolean = false;
-  public admobAppId: string = '';
-  public admobBannerId: string = '';
-  public admobInterstitialId: string = '';
-  public updateAt;
-  public publishedAt;
-  public shortDescription: string = '';
-  private createdAt;
+  public confidentialityAgreement = false;
+  public toUpdate = false;
+  public readyToPublished = false;
+  public checking = false;
+  public published = false;
+  public rejected = false;
+  public admobAppId = '';
+  public admobBannerId = '';
+  public admobInterstitialId = '';
+  public updateAt = '';
+  public publishedAt = '';
+  public shortDescription = '';
+  private readonly createdAt = '';
 
   constructor(public appName: string) {
-    this.createdAt = new Date();
+    this.createdAt = new Date().toString();
   }
 
+  updatePublishedDate() {
+    this.publishedAt = new Date().toString();
+  }
+
+  updateUpdatedDate() {
+    this.updateAt = new Date().toString();
+  }
 }

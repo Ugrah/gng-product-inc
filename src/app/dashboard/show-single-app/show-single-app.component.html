@@ -1,3 +1,72 @@
-<p>
-  show-single-app works!
-</p>
+<app-dashboard-navbar></app-dashboard-navbar>
+
+<ng-sidebar-container style="height: 100vh;">
+
+  <!-- A sidebar -->
+  <ng-sidebar mode="over" [(opened)]="_opened">
+    <app-dashboard-aside></app-dashboard-aside>
+  </ng-sidebar>
+
+  <!-- Page content -->
+  <div ng-sidebar-content style="position: relative;">
+    <div *ngIf="_opened" ngStyle="" style="z-index: 10; background-color: rgba(34,34,34,0.4); width: 100%; height: 100%; position: absolute; top: 0; left: 0;" (click)="toggleSidebar()"></div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <a (click)="toggleSidebar()">
+            <span style="font-size: 1.2em;">
+              <i *ngIf="!_opened" class="fas fa-bars"></i>
+              <i *ngIf="_opened" class="fas fa-times"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h3 [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}"  *ngIf="app">{{ app.appName }} <small class="text-muted"> Create at : {{ app.createdAt | date:'medium' }}</small></h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header text-muted">
+              <span [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}" style="font-size: 1.4em;">
+                <i *ngIf="platform === 'android'" class="fab fa-android"></i>
+                <i *ngIf="platform === 'ios'" class="fab fa-app-store-ios"></i>
+              </span> Update <span class="text-warning" *ngIf="app">{{ app.appName }}</span> App.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="card border-light mb-3">
+            <div *ngIf="app" class="card-body text-dark">
+              <p class="card-text">Add here the form to edit app</p>
+              <fieldset>
+                <legend>Personalia:</legend>
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="appName">App Name</label>
+                      <input [disabled]="app.published" type="text" class="form-control" id="appName" [(ngModel)]="app.appName">
+                    </div>
+                    <div class="col form-group">
+                      <label for="packageName">Package Name</label>
+                      <input type="text" class="form-control" id="packageName" [(ngModel)]="app.packageName">
+                    </div>
+                  </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</ng-sidebar-container>

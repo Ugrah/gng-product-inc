@@ -17,14 +17,6 @@ export class AndroidApp extends AppBase {
     return isGood;
   }
 
-  updatePublishedDate() {
-    this.publishedAt = new Date();
-  }
-
-  updateUpdatedDate() {
-    this.updateAt = new Date();
-  }
-
   getRandomId() {
     this.id = UUID.UUID();
   }

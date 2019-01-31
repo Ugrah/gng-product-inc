@@ -9,7 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth.service';
 import { SignInComponent } from './sign-in/sign-in.component';
 import {AuthGuardService} from './services/auth-guard.service';
@@ -61,6 +61,7 @@ import { RejectedAppsComponent } from './dashboard/dashboard-apps/rejected-apps/
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     SidebarModule.forRoot()
