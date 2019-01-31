@@ -174,6 +174,24 @@ export class AppsService implements OnInit, OnDestroy {
     }
   }
 
+  persistOneApp(platform: 'ios' | 'android', appToSave) {
+    if (platform === 'ios') {
+      const indexToUpdate = this.iosAppsList.findIndex(app => app.id === appToSave.id);
+      this.iosAppsList[indexToUpdate] = appToSave;
+      this.saveIosAppsToServer();
+      this.getIosAppsFromServer();
+      console.log('Persit a ios app');
+    }
+    if (platform === 'android') {
+      const indexToUpdate = this.androidAppsList.findIndex(app => app.id === appToSave.id);
+      this.androidAppsList[indexToUpdate] = appToSave;
+      this.saveAndroidAppsToServer();
+      this.getAndroidAppsFromServer();
+      console.log('Persit a android app');
+    }
+    this.emitAllApps();
+  }
+
   ngOnDestroy() {
     this.iosAppsListSubject.unsubscribe();
     this.androidAppsListSubject.unsubscribe();

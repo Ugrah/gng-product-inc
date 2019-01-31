@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {ClipboardModule} from 'ngx-clipboard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -64,7 +65,8 @@ import { RejectedAppsComponent } from './dashboard/dashboard-apps/rejected-apps/
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SidebarModule.forRoot()
+    SidebarModule.forRoot(),
+    ClipboardModule
   ],
   providers: [
     AuthService,

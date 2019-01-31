@@ -25,7 +25,7 @@
 
       <div class="row">
         <div class="col">
-          <h3 [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}"  *ngIf="app">{{ app.appName }} <small class="text-muted"> Create at : {{ app.createdAt | date:'medium' }}</small></h3>
+          <h3 [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}"  *ngIf="app">{{ app.appName }} <small class="text-muted"> Create at : {{ app.createdAt | date }}</small></h3>
         </div>
       </div>
 
@@ -34,9 +34,9 @@
           <div class="card">
             <div class="card-header text-muted">
               <span [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}" style="font-size: 1.4em;">
-                <i *ngIf="platform === 'android'" class="fab fa-android"></i>
-                <i *ngIf="platform === 'ios'" class="fab fa-app-store-ios"></i>
+                <i [ngClass]="{'fab': true, 'fa-app-store-ios': platform === 'ios', 'fa-android': platform === 'android'}"></i>
               </span> Update <span class="text-warning" *ngIf="app">{{ app.appName }}</span> App.
+              <button type="button" *ngIf="app" [ngClass]="{'btn float-right': true, 'btn-info': platform === 'ios', 'btn-success': platform === 'android'}" (click)="saveApp()" [disabled]="!app.appName" >Save Changes</button>
             </div>
           </div>
         </div>
@@ -46,19 +46,164 @@
         <div class="col">
           <div class="card border-light mb-3">
             <div *ngIf="app" class="card-body text-dark">
-              <p class="card-text">Add here the form to edit app</p>
+
+              <!-- Alert Save success -->
+              <div *ngIf="_alertSaveSuccess && app" class="alert alert-success alert-dismissible fade show" role="alert">
+                The changes made to the application "<strong>{{app.appName}}</strong>" have been saved successfully
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
               <fieldset>
-                <legend>Personalia:</legend>
+                <legend [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}">App Informations</legend>
                   <div class="form-row">
                     <div class="col form-group">
                       <label for="appName">App Name</label>
-                      <input [disabled]="app.published" type="text" class="form-control" id="appName" [(ngModel)]="app.appName">
+                      <div class="input-group">
+                        <input [disabled]="app.published" type="text" class="form-control" id="appName" [(ngModel)]="app.appName" required #appName>
+                        <div class="input-group-prepend">
+                          <button id="appNamePrepend" [ngxClipboard]="appName">
+                            <i class="far fa-copy"></i>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                     <div class="col form-group">
                       <label for="packageName">Package Name</label>
-                      <input type="text" class="form-control" id="packageName" [(ngModel)]="app.packageName">
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="packageName" [(ngModel)]="app.packageName" #packageName>
+                        <div class="input-group-prepend">
+                          <button id="packageNamePrepend" [ngxClipboard]="packageName">
+                            <i class="far fa-copy"></i>
+                          </button>
+                        </div>
+                    </div>
                     </div>
                   </div>
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="shortDescription">Short Description</label>
+                      <input type="text" class="form-control" id="shortDescription" [(ngModel)]="app.shortDescription">
+                    </div>
+                    <div class="col form-group">
+                      <label for="remarks">Remarks</label>
+                      <input type="text" class="form-control" id="remarks" [(ngModel)]="app.remarks">
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="completeDescription">Description</label>
+                      <textarea class="form-control" id="completeDescription" rows="3" [(ngModel)]="app.completeDescription"></textarea>
+                    </div>
+                  </div>
+              </fieldset>
+
+              <fieldset>
+                <legend [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}">Google Admob</legend>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label for="admobAppId">ADMOB_APP_ID</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="admobAppId" [(ngModel)]="app.admobAppId" #admobAppId>
+                      <div class="input-group-prepend">
+                        <button id="admobAppIdPrepend" [ngxClipboard]="admobAppId">
+                          <i class="far fa-copy"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col form-group">
+                    <label for="admobAppId">admobBannerId</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="admobBannerId" [(ngModel)]="app.admobBannerId" [disabled]="!app.admobAppId" #admobBannerId>
+                      <div class="input-group-prepend">
+                        <button id="admobBannerIdPrepend" [ngxClipboard]="admobBannerId">
+                          <i class="far fa-copy"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col form-group">
+                    <label for="admobAppId">admobInterstitialId</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="admobInterstitialId" [(ngModel)]="app.admobInterstitialId"  [disabled]="!app.admobAppId" #admobInterstitialId>
+                      <div class="input-group-prepend">
+                        <button id="admobInterstitialIdPrepend" [ngxClipboard]="admobInterstitialId">
+                          <i class="far fa-copy"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}">Status</legend>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <span class="switch-title">App Design</span><br>
+                    <label class="switch">
+                      <input class="switch-input" type="checkbox" [checked]="app.design" [(ngModel)]="app.design">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="col form-group">
+                    <span class="switch-title">App Creation</span><br>
+                    <label class="switch">
+                      <input class="switch-input" type="checkbox" [checked]="app.creation" [(ngModel)]="app.creation">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="col form-group">
+                    <span class="switch-title">Confidentiality Agreement</span><br>
+                    <label class="switch">
+                      <input class="switch-input" type="checkbox" [checked]="app.confidentialityAgreement" [(ngModel)]="app.confidentialityAgreement">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="col form-group">
+                    <span class="switch-title">Pending approval</span><br>
+                    <label class="switch">
+                      <input class="switch-input" type="checkbox" [checked]="app.checking" [(ngModel)]="app.checking">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <span class="switch-title">Ready to Publish</span><br>
+                    <label class="switch">
+                      <input class="switch-input" type="checkbox" [checked]="app.readyToPublished" [(ngModel)]="app.readyToPublished" disabled>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="col form-group">
+                    <span class="switch-title">App already published</span><br>
+                    <label class="switch">
+                      <input class="switch-input" type="checkbox" [checked]="app.published" [(ngModel)]="app.published" disabled>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label for="createdAt">Created at</label>
+                    <input [disabled]="app.createdAt" type="text" class="form-control" id="createdAt" [placeholder]="app.createdAt | date:'medium'" disabled>
+                  </div>
+                  <div class="col form-group">
+                    <label for="publishedAt">Published at</label>
+                    <input type="text" class="form-control" id="publishedAt" [placeholder]="app.publishedAt | date:'medium'" disabled>
+                  </div>
+                  <div class="col form-group">
+                    <label for="updateAt">Update at</label>
+                    <input type="text" class="form-control" id="updateAt" [placeholder]="app.updateAt | date:'medium'"  disabled>
+                  </div>
+                </div>
               </fieldset>
             </div>
           </div>

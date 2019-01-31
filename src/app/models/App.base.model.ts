@@ -19,10 +19,10 @@ export class AppBase {
   public admobAppId = '';
   public admobBannerId = '';
   public admobInterstitialId = '';
-  public updateAt = '';
-  public publishedAt = '';
+  public updateAt: any;
+  public publishedAt: any;
   public shortDescription = '';
-  private readonly createdAt = '';
+  private readonly createdAt: any;
 
   constructor(public appName: string) {
     this.createdAt = new Date().toString();

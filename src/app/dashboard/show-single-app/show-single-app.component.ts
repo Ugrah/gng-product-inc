@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {IosApp} from '../../models/Ios.app.model';
 import {AndroidApp} from '../../models/Android.app.model';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {AppsService} from '../../services/apps.service';
 
 @Component({
@@ -13,6 +13,7 @@ import {AppsService} from '../../services/apps.service';
 export class ShowSingleAppComponent implements OnInit, OnDestroy {
 
   private _opened = false;
+  private _alertSaveSuccess = false;
 
   appsList: any;
   iosAppsSubscription: Subscription;
@@ -23,7 +24,6 @@ export class ShowSingleAppComponent implements OnInit, OnDestroy {
   app: IosApp | AndroidApp;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
               private appsService: AppsService) {
   }
 
@@ -54,12 +54,25 @@ export class ShowSingleAppComponent implements OnInit, OnDestroy {
     this.appsService.emitAllApps();
   }
 
+  public toggleSidebar() {
+    this._opened = !this._opened;
+  }
+
   getApp() {
     this.app = this.appsList.find(item => item.id === this.appId);
   }
 
-  public toggleSidebar() {
-    this._opened = !this._opened;
+  saveApp() {
+    this.appsService.persistOneApp(this.platform, this.app);
+    this._alertSaveSuccess = true;
+    setTimeout(() => {
+      this._alertSaveSuccess = false;
+    }, 4000);
+    console.log('App Save show alert to 5 second');
+  }
+
+  getPrivacyPolicyUrl() {
+    return `${window.location.protocol}//${window.location.host}/${this.platform}/${this.app.id}`;
   }
 
   ngOnDestroy() {
