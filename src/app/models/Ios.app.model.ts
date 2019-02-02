@@ -11,16 +11,4 @@ export class IosApp extends AppBase {
     this.getRandomId();
     this.appCertificate = false;
   }
-
-  admobsIsFull() {
-    let isGood = true;
-    if (this.admobAppId === '' || this.admobBannerId === '' || this.admobInterstitialId === '') {
-      isGood = false;
-    }
-    return isGood;
-  }
-
-  getRandomId() {
-    this.id = UUID.UUID();
-  }
 }

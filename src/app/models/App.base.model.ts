@@ -9,8 +9,9 @@ export class AppBase {
   public creation = false;
   public packageName = '';
   public remarks = '';
-  public keyWords: string[] = [];
-  public confidentialityAgreement = false;
+  public shortDescription = '';
+  public keyWords = '';
+  public privacyPolityType: 'free' | 'commercial' | 'openSource' | 'freemium' | 'adSupported';
   public toUpdate = false;
   public readyToPublished = false;
   public checking = false;
@@ -19,20 +20,15 @@ export class AppBase {
   public admobAppId = '';
   public admobBannerId = '';
   public admobInterstitialId = '';
-  public updateAt: any;
-  public publishedAt: any;
-  public shortDescription = '';
+  public lastModificationDate: any;
+  public lastDatePosting: any;
   private readonly createdAt: any;
 
   constructor(public appName: string) {
     this.createdAt = new Date().toString();
   }
 
-  updatePublishedDate() {
-    this.publishedAt = new Date().toString();
-  }
-
-  updateUpdatedDate() {
-    this.updateAt = new Date().toString();
+  getRandomId() {
+    this.id = UUID.UUID();
   }
 }

@@ -8,16 +8,4 @@ export class AndroidApp extends AppBase {
 
     this.getRandomId();
   }
-
-  admobsIsFull() {
-    let isGood = true;
-    if (this.admobAppId === '' || this.admobBannerId === '' || this.admobInterstitialId === '') {
-      isGood = false;
-    }
-    return isGood;
-  }
-
-  getRandomId() {
-    this.id = UUID.UUID();
-  }
 }

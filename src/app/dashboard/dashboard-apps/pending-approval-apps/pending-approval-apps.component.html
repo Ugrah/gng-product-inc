@@ -1,3 +1,64 @@
-<p>
-  pending-approval-apps works!
-</p>
+<app-dashboard-navbar></app-dashboard-navbar>
+
+<ng-sidebar-container style="height: 100vh;">
+
+  <!-- A sidebar -->
+  <ng-sidebar mode="over" [(opened)]="_opened">
+    <app-dashboard-aside></app-dashboard-aside>
+  </ng-sidebar>
+
+  <!-- Page content -->
+  <div ng-sidebar-content style="position: relative;">
+    <div *ngIf="_opened" ngStyle="" style="z-index: 10; background-color: rgba(34,34,34,0.4); width: 100%; height: 100%; position: absolute; top: 0; left: 0;" (click)="toggleSidebar()"></div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <a (click)="toggleSidebar()">
+            <span style="font-size: 1.2em;">
+              <i *ngIf="!_opened" class="fas fa-bars"></i>
+              <i *ngIf="_opened" class="fas fa-times"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h3>Applications</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header text-muted">
+              <span style="font-size: 1.2em;">
+                <i class="fas fa-folder-plus"></i>
+              </span> New Apps List
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs bouttons -->
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a routerLinkActive="active" routerLink="/pending-approval-apps/ios" [ngClass]="{'nav-item': true, 'nav-link': true, 'active': platform === 'ios'}" id="nav-ios-apps-tab" data-toggle="tab" href="#nav-ios-apps" role="tab" aria-controls="nav-ios-apps" aria-selected="false">
+            <span style="font-size: 1.2em;"><i class="fab fa-app-store-ios"></i></span> Ios Apps
+            <span [ngClass]="{'badge': true} "></span>
+          </a>
+          <a routerLinkActive="active" routerLink="/pending-approval-apps/android" [ngClass]="{'nav-item': true, 'nav-link': true, 'active': platform === 'android'}" id="nav-android-apps-tab" data-toggle="tab" href="#nav-android-apps" role="tab" aria-controls="nav-android-apps" aria-selected="false">
+            <span style="font-size: 1.2em;"><i class="fab fa-android"></i></span> Android Apps
+            <span [ngClass]="{'badge': true} "></span></a>
+        </div>
+      </nav>
+
+      <app-apps-by-platform *ngIf="platform === 'ios'" [platform]="'ios'" [appsList]="appsService.getCheckingAppsByPlatform('ios')"></app-apps-by-platform>
+      <app-apps-by-platform *ngIf="platform === 'android'" [platform]="'android'" [appsList]="appsService.getCheckingAppsByPlatform('android')"></app-apps-by-platform>
+
+    </div>
+
+  </div>
+
+</ng-sidebar-container>

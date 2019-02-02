@@ -39,8 +39,10 @@
           </div>
         </div>
         <div class="card-footer text-secondary bg-light">
-          Footer
-          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          <a class="d-block link-unstyled" [routerLink]="getRouterLinkFromLink('/to-update-apps')">
+            Show List
+            <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          </a>
         </div>
       </div>
 
@@ -58,8 +60,10 @@
           </div>
         </div>
         <div class="card-footer text-info bg-light">
-          Footer
-          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          <a class="d-block link-unstyled" [routerLink]="getRouterLinkFromLink('/ready-apps')">
+            Show List
+            <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          </a>
         </div>
       </div>
 
@@ -77,8 +81,10 @@
           </div>
         </div>
         <div class="card-footer text-warning bg-light">
-          Footer
-          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          <a class="d-block link-unstyled" [routerLink]="getRouterLinkFromLink('/pending-approval-apps')">
+            Show List
+            <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          </a>
         </div>
       </div>
 
@@ -96,8 +102,10 @@
           </div>
         </div>
         <div class="card-footer text-success bg-light">
-          Footer
-          <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          <a class="d-block link-unstyled" [routerLink]="getRouterLinkFromLink('/published-apps')">
+            Show List
+            <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          </a>
         </div>
       </div>
 
@@ -115,8 +123,10 @@
           </div>
         </div>
         <div class="card-footer text-danger bg-light">
-          Footer
+          <a class="d-block link-unstyled" [routerLink]="getRouterLinkFromLink('/rejected-apps')">
+            Show List
           <span class="float-right align-bottom"><i class="fas fa-arrow-alt-circle-right"></i></span>
+          </a>
         </div>
       </div>
 

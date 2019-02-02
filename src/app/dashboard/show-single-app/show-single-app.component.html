@@ -55,7 +55,7 @@
                 </button>
               </div>
 
-              <fieldset>
+              <fieldset *ngIf="app">
                 <legend [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}">App Informations</legend>
                   <div class="form-row">
                     <div class="col form-group">
@@ -98,10 +98,43 @@
                       <label for="completeDescription">Description</label>
                       <textarea class="form-control" id="completeDescription" rows="3" [(ngModel)]="app.completeDescription"></textarea>
                     </div>
+                    <div class="col form-group">
+                      <label for="keyWords">Key Words <span class="text-muted">Separate by coma.</span></label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="keyWords" [(ngModel)]="app.keyWords" #keyWords>
+                        <div class="input-group-prepend">
+                          <button id="keyWordsPrepend" [ngxClipboard]="keyWords">
+                            <i class="far fa-copy"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label for="privacyPolityType">Privacy Polity Type</label>
+                    <select [(ngModel)]="app.privacyPolityType" required class="custom-select my-1 mr-sm-2" id="privacyPolityType">
+                      <option *ngFor="let type of _privacyPolicyTypes"
+                              [value]="type.value"
+                              [selected]="type.value === app.privacyPolityType">{{ type.name }}</option>
+                    </select>
+                  </div>
+                  <div class="col form-group">
+                    <label for="privacyPolicy">Privacy Policy</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="privacyPolicy" [value]="getPrivacyPolicyUrl()" readonly #privacyPolicy>
+                      <div class="input-group-prepend">
+                        <button id="privacyPolicyPrepend" [ngxClipboard]="privacyPolicy">
+                          <i class="far fa-copy"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </fieldset>
 
-              <fieldset>
+              <fieldset  *ngIf="app">
                 <legend [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}">Google Admob</legend>
                 <div class="form-row">
                   <div class="col form-group">
@@ -142,7 +175,7 @@
                 </div>
               </fieldset>
 
-              <fieldset>
+              <fieldset  *ngIf="app">
                 <legend [ngClass]="{'text-success' : platform === 'android', 'text-info': platform === 'ios'}">Status</legend>
                 <div class="form-row">
                   <div class="col form-group">
@@ -159,10 +192,26 @@
                       <span class="slider round"></span>
                     </label>
                   </div>
-                  <div class="col form-group">
-                    <span class="switch-title">Confidentiality Agreement</span><br>
+                  <div *ngIf="platform === 'ios'" class="col form-group">
+                    <span class="switch-title">App Certificate</span><br>
                     <label class="switch">
-                      <input class="switch-input" type="checkbox" [checked]="app.confidentialityAgreement" [(ngModel)]="app.confidentialityAgreement">
+                      <input class="switch-input" type="checkbox" [checked]="app.appCertificate" [(ngModel)]="app.appCertificate">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="col form-group">
+                    <span class="switch-title">Ready to Publish</span><br>
+                    <label class="switch">
+                      <input class="switch-input" type="checkbox" [checked]="app.readyToPublished" [(ngModel)]="app.readyToPublished">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <span class="switch-title">App to update</span><br>
+                    <label class="switch">
+                      <input class="switch-input" type="checkbox" [checked]="app.toUpdate" [(ngModel)]="app.toUpdate">
                       <span class="slider round"></span>
                     </label>
                   </div>
@@ -173,19 +222,10 @@
                       <span class="slider round"></span>
                     </label>
                   </div>
-                </div>
-                <div class="form-row">
                   <div class="col form-group">
-                    <span class="switch-title">Ready to Publish</span><br>
+                    <span class="switch-title">App Rejected</span><br>
                     <label class="switch">
-                      <input class="switch-input" type="checkbox" [checked]="app.readyToPublished" [(ngModel)]="app.readyToPublished" disabled>
-                      <span class="slider round"></span>
-                    </label>
-                  </div>
-                  <div class="col form-group">
-                    <span class="switch-title">App already published</span><br>
-                    <label class="switch">
-                      <input class="switch-input" type="checkbox" [checked]="app.published" [(ngModel)]="app.published" disabled>
+                      <input class="switch-input" type="checkbox" [checked]="app.rejected" [(ngModel)]="app.rejected">
                       <span class="slider round"></span>
                     </label>
                   </div>
@@ -196,13 +236,17 @@
                     <input [disabled]="app.createdAt" type="text" class="form-control" id="createdAt" [placeholder]="app.createdAt | date:'medium'" disabled>
                   </div>
                   <div class="col form-group">
-                    <label for="publishedAt">Published at</label>
-                    <input type="text" class="form-control" id="publishedAt" [placeholder]="app.publishedAt | date:'medium'" disabled>
+                    <label for="lastModificationDate">Last modification date</label>
+                    <input type="text" class="form-control" id="lastModificationDate" [placeholder]="app.lastModificationDate | date:'medium'" disabled>
                   </div>
                   <div class="col form-group">
-                    <label for="updateAt">Update at</label>
-                    <input type="text" class="form-control" id="updateAt" [placeholder]="app.updateAt | date:'medium'"  disabled>
+                    <label for="lastDatePosting">Last posting Date</label>
+                    <input type="text" class="form-control" id="lastDatePosting" [placeholder]="app.lastDatePosting | date:'medium'"  disabled>
                   </div>
+                </div>
+                <div class="form-row">
+                  <button type="button" *ngIf="app" [ngClass]="{'btn float-left': true, 'btn-info': platform === 'ios', 'btn-success': platform === 'android'}" (click)="onAppHasBeenPublished()" [disabled]="!app.appName" >App has been published</button>
+
                 </div>
               </fieldset>
             </div>

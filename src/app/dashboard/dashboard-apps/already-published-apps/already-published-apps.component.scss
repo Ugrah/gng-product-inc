@@ -1,0 +1,14 @@
+.card{
+  min-width: 18rem;
+  margin-bottom: 2rem;
+}
+
+a.nav-item.nav-link{
+  color: #292B2E;
+  background-color: #f4f4f4;
+}
+
+a.nav-item.nav-link.active{
+  color: white;
+  background-color: dodgerblue;
+}

@@ -72,7 +72,7 @@ export class AppsService implements OnInit, OnDestroy {
   getIosAppsFromServer() {
     firebase.database().ref('/iosApps')
       .on('value', (data) => {
-        this.iosAppsList = data.val() ? data.val() : [];
+        this.iosAppsList = <IosApp[]>data.val() ? <IosApp[]>data.val() : [];
         this.emitIosAppsSubject();
       });
   }
@@ -80,7 +80,7 @@ export class AppsService implements OnInit, OnDestroy {
   getAndroidAppsFromServer() {
     firebase.database().ref('/androidApps')
       .on('value', (data) => {
-        this.androidAppsList = data.val() ? data.val() : [];
+        this.androidAppsList = <AndroidApp[]>data.val() ? <AndroidApp[]>data.val() : [];
         this.emitAndroidAppsSubject();
       });
   }
@@ -174,20 +174,30 @@ export class AppsService implements OnInit, OnDestroy {
     }
   }
 
+  refreshModificationDateApp(app) {
+    app.lastModificationDate = new Date().toString();
+    return app;
+  }
+
+  refreshPostingDateApp(app) {
+    app.lastDatePosting = new Date().toString();
+    return app;
+  }
+
   persistOneApp(platform: 'ios' | 'android', appToSave) {
     if (platform === 'ios') {
       const indexToUpdate = this.iosAppsList.findIndex(app => app.id === appToSave.id);
+      appToSave.lastModificationDate = new Date().toString();
       this.iosAppsList[indexToUpdate] = appToSave;
       this.saveIosAppsToServer();
       this.getIosAppsFromServer();
-      console.log('Persit a ios app');
     }
     if (platform === 'android') {
       const indexToUpdate = this.androidAppsList.findIndex(app => app.id === appToSave.id);
+      appToSave.lastModificationDate = new Date().toString();
       this.androidAppsList[indexToUpdate] = appToSave;
       this.saveAndroidAppsToServer();
       this.getAndroidAppsFromServer();
-      console.log('Persit a android app');
     }
     this.emitAllApps();
   }

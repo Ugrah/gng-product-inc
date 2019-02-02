@@ -14,6 +14,14 @@ export class ShowSingleAppComponent implements OnInit, OnDestroy {
 
   private _opened = false;
   private _alertSaveSuccess = false;
+  private _privacyPolicy = 'privacy-policy';
+  private _privacyPolicyTypes = [
+    {name: 'Free', value: 'free'},
+    {name: 'Open Source', value: 'openSource'},
+    {name: 'Freemium', value: 'freemium'},
+    {name: 'Ad Supported', value: 'adSupported'},
+    {name: 'Commercial', value: 'commercial'},
+  ];
 
   appsList: any;
   iosAppsSubscription: Subscription;
@@ -68,11 +76,20 @@ export class ShowSingleAppComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this._alertSaveSuccess = false;
     }, 4000);
-    console.log('App Save show alert to 5 second');
   }
 
   getPrivacyPolicyUrl() {
-    return `${window.location.protocol}//${window.location.host}/${this.platform}/${this.app.id}`;
+    return `${window.location.protocol}//${window.location.host}/${this._privacyPolicy}/${this.platform}/${this.app.id}`;
+  }
+
+  onAppHasBeenPublished() {
+    this.app.published = true;
+    this.app.lastDatePosting = new Date().toString();
+    this.appsService.persistOneApp(this.platform, this.app);
+    this._alertSaveSuccess = true;
+    setTimeout(() => {
+      this._alertSaveSuccess = false;
+    }, 4000);
   }
 
   ngOnDestroy() {

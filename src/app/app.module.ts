@@ -32,6 +32,7 @@ import { ReadyAppsComponent } from './dashboard/dashboard-apps/ready-apps/ready-
 import { PendingApprovalAppsComponent } from './dashboard/dashboard-apps/pending-approval-apps/pending-approval-apps.component';
 import { AlreadyPublishedAppsComponent } from './dashboard/dashboard-apps/already-published-apps/already-published-apps.component';
 import { RejectedAppsComponent } from './dashboard/dashboard-apps/rejected-apps/rejected-apps.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { RejectedAppsComponent } from './dashboard/dashboard-apps/rejected-apps/
     ReadyAppsComponent,
     PendingApprovalAppsComponent,
     AlreadyPublishedAppsComponent,
-    RejectedAppsComponent
+    RejectedAppsComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
