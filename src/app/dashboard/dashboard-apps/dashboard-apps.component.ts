@@ -9,17 +9,17 @@ import {AppsService} from '../../services/apps.service';
 })
 export class DashboardAppsComponent implements OnInit {
 
-  private _opened = false;
+  opened = false;
 
   constructor(private modalService: NgbModal,
-              private appsService: AppsService) {
+              public appsService: AppsService) {
   }
 
   ngOnInit() {
   }
 
   public toggleSidebar() {
-    this._opened = !this._opened;
+    this.opened = !this.opened;
   }
 
   onOpenModal(modal) {

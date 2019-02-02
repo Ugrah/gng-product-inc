@@ -23,7 +23,6 @@ import {AppsService} from './services/apps.service';
 import { NewAppFormComponent } from './forms/new-app-form/new-app-form.component';
 import { AppsRapportsComponent } from './dashboard/apps-rapports/apps-rapports.component';
 import { CreateAppComponent } from './dashboard/create-app/create-app.component';
-import { EditAppComponent } from './dashboard/edit-app/edit-app.component';
 import { ShowSingleAppComponent } from './dashboard/show-single-app/show-single-app.component';
 import { AppsByPlatformComponent } from './dashboard/apps-by-platform/apps-by-platform.component';
 import { NewAppsComponent } from './dashboard/dashboard-apps/new-apps/new-apps.component';
@@ -49,7 +48,6 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     NewAppFormComponent,
     AppsRapportsComponent,
     CreateAppComponent,
-    EditAppComponent,
     ShowSingleAppComponent,
     AppsByPlatformComponent,
     NewAppsComponent,

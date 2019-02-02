@@ -12,7 +12,7 @@ import {AppsService} from '../../../services/apps.service';
 })
 export class NewAppsComponent implements OnInit {
 
-  private _opened = false;
+  opened = false;
   platform: any;
   appsList: any;
 
@@ -40,7 +40,7 @@ export class NewAppsComponent implements OnInit {
   }
 
   public toggleSidebar() {
-    this._opened = !this._opened;
+    this.opened = !this.opened;
   }
 
 }

@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
-  private _opened = false;
+   opened = false;
 
   constructor() {
   }
 
   public toggleSidebar() {
-    this._opened = !this._opened;
+    this.opened = !this.opened;
   }
 
 }

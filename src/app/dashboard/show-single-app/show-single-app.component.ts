@@ -12,10 +12,10 @@ import {AppsService} from '../../services/apps.service';
 })
 export class ShowSingleAppComponent implements OnInit, OnDestroy {
 
-  private _opened = false;
-  private _alertSaveSuccess = false;
-  private _privacyPolicy = 'privacy-policy';
-  private _privacyPolicyTypes = [
+  opened = false;
+  alertSaveSuccess = false;
+  privacyPolicy = 'privacy-policy';
+  privacyPolicyTypes = [
     {name: 'Free', value: 'free'},
     {name: 'Open Source', value: 'openSource'},
     {name: 'Freemium', value: 'freemium'},
@@ -46,6 +46,7 @@ export class ShowSingleAppComponent implements OnInit, OnDestroy {
       (iosApps: IosApp[]) => {
         if (this.platform === 'ios') {
           this.appsList = iosApps;
+          console.log(iosApps);
           this.getApp();
         }
       });
@@ -63,7 +64,7 @@ export class ShowSingleAppComponent implements OnInit, OnDestroy {
   }
 
   public toggleSidebar() {
-    this._opened = !this._opened;
+    this.opened = !this.opened;
   }
 
   getApp() {
@@ -72,23 +73,23 @@ export class ShowSingleAppComponent implements OnInit, OnDestroy {
 
   saveApp() {
     this.appsService.persistOneApp(this.platform, this.app);
-    this._alertSaveSuccess = true;
+    this.alertSaveSuccess = true;
     setTimeout(() => {
-      this._alertSaveSuccess = false;
+      this.alertSaveSuccess = false;
     }, 4000);
   }
 
   getPrivacyPolicyUrl() {
-    return `${window.location.protocol}//${window.location.host}/${this._privacyPolicy}/${this.platform}/${this.app.id}`;
+    return `${window.location.protocol}//${window.location.host}/${this.privacyPolicy}/${this.platform}/${this.app.id}`;
   }
 
   onAppHasBeenPublished() {
     this.app.published = true;
     this.app.lastDatePosting = new Date().toString();
     this.appsService.persistOneApp(this.platform, this.app);
-    this._alertSaveSuccess = true;
+    this.alertSaveSuccess = true;
     setTimeout(() => {
-      this._alertSaveSuccess = false;
+      this.alertSaveSuccess = false;
     }, 4000);
   }
 

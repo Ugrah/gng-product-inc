@@ -12,7 +12,7 @@ import {AndroidApp} from '../../../models/Android.app.model';
 })
 export class ReadyAppsComponent implements OnInit {
 
-  private _opened = false;
+  opened = false;
   platform: any;
   appsList: any;
 
@@ -40,7 +40,7 @@ export class ReadyAppsComponent implements OnInit {
   }
 
   public toggleSidebar() {
-    this._opened = !this._opened;
+    this.opened = !this.opened;
   }
 
 }

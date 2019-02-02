@@ -72,7 +72,7 @@ export class AppsService implements OnInit, OnDestroy {
   getIosAppsFromServer() {
     firebase.database().ref('/iosApps')
       .on('value', (data) => {
-        this.iosAppsList = <IosApp[]>data.val() ? <IosApp[]>data.val() : [];
+        this.iosAppsList = data.val() ? data.val() : [];
         this.emitIosAppsSubject();
       });
   }
@@ -80,7 +80,7 @@ export class AppsService implements OnInit, OnDestroy {
   getAndroidAppsFromServer() {
     firebase.database().ref('/androidApps')
       .on('value', (data) => {
-        this.androidAppsList = <AndroidApp[]>data.val() ? <AndroidApp[]>data.val() : [];
+        this.androidAppsList = data.val() ? data.val() : [];
         this.emitAndroidAppsSubject();
       });
   }
